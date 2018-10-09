@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue Js</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+
+<h1>Vue Js Component basics</h1>
+<p>Forms</p>
+<div id="components-demo">
+    <button-counter></button-counter>
+  </div>
+
+  <div id="blog-post-demo">
+      <blog-post title="My journey with Vue"></blog-post>
+      <blog-post title="Blogging with Vue"></blog-post>
+      <blog-post title="Why Vue is so fun"></blog-post>
+  </div>
+
+
+  <div id="dynamic-component-demo" class="demo">
+      <button
+        v-for="tab in tabs"
+        v-bind:key="tab"
+        v-bind:class="['tab-button', { active: currentTab === tab }]"
+        v-on:click="currentTab = tab"
+      >{{ tab }}</button>
+    
+      <component
+        v-bind:is="currentTabComponent"
+        class="tab"
+      ></component>
+    </div>
+<script>
+  // Define a new component called button-counter
+  Vue.component('button-counter', {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  })
+  Vue.component('blog-post', {
+  props: ['title'],
+  template: '<h3>{{ title }}</h3>'
+})
+
+
+Vue.component('tab-home', { 
+	template: '<div>Home component</div>' 
+})
+Vue.component('tab-posts', { 
+	template: '<div>Posts component</div>' 
+})
+Vue.component('tab-archive', { 
+	template: '<div>Archive component</div>' 
+})
+
+  var example1 = new Vue({ el: '#components-demo' })
+  var example2 = new Vue({ el: '#blog-post-demo'})
+  var example3 = new Vue({
+  el: '#dynamic-component-demo',
+  data: {
+    currentTab: 'Home',
+    tabs: ['Home', 'Posts', 'Archive']
+  },
+  computed: {
+    currentTabComponent: function () {
+      return 'tab-' + this.currentTab.toLowerCase()
+    }
+  }
+})
+  
+</script>
+
+</body>
+</html>

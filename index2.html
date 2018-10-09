@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vue Js</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</head>
+<body>
+
+<h1>Vue Js Component Example</h1>
+<p>List Rendering</p>
+<h2>Lists</h2>
+<ul id="example-1">
+    <li v-for="item in items">
+        {{ item.message }}
+    </li>
+</ul>
+<br/>
+<h2>Lists with Parent</h2>
+  <ul id="example-2">
+    <li v-for="(item, index) in items">
+      {{ parentMessage }} - {{ index }} - {{ item.message }}
+    </li>
+  </ul>
+<h2>Lists For Objects</h2>
+<ul id="v-for-object" class="demo">
+<li v-for="(value, key, index) in object">
+        {{ index }}. {{ key }}: {{ value }}
+</li>
+</ul>
+
+
+
+
+<script>
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+            { message: 'Foo' },
+            { message: 'Bar' }
+            ]
+        }
+        });
+    var example2 = new Vue({
+    el: '#example-2',
+    data: {
+        parentMessage: 'Parent',
+        items: [
+        { message: 'Foo' },
+        { message: 'Bar' }
+        ]
+    }
+    });
+    var example3 = new Vue({
+  el: '#v-for-object',
+  data: {
+    object: {
+      firstName: 'John',
+      lastName: 'Doe',
+      age: 30
+    }
+  }
+})
+</script>
+
+</body>
+</html>
